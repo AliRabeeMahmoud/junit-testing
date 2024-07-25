@@ -1,16 +1,4 @@
-spring:
-  datasource:
-    url: jdbc:h2://mem:db;DB_CLOSE_DELAY=-1
-    username: sa
-    password: sa
-    driver-class-name: org.h2.Driver
 
-  # The SQL dialect makes Hibernate generate better SQL for the chosen database
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
-    show-sql: true
+### No need to configure DB because the annotation: @DataJpaTest contains @AutoConfigurTestDatabase
+### which will automatically configure an In-memory database for you
 
-  #JPA settings
-  jpa.hibernate.ddl-auto: create-drop

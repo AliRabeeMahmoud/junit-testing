@@ -19,7 +19,7 @@ public class CloudVendorRepositoryTest {
 
     @Autowired
     private CloudVendorRepository cloudVendorRepository;
-    CloudVendor cloudVendor;
+    private CloudVendor cloudVendor;
 
     @BeforeEach
     void setUp() {
