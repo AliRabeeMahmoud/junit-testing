@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@DataJpaTest
+@DataJpaTest  //autoconfiguration of embedded DB
 public class CloudVendorRepositoryTest {
 
   //  given - when - then

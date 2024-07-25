@@ -64,10 +64,16 @@ class CloudVendorServiceImplTest {
     @Test
     void testDeleteCloudVendor() {
         mock(CloudVendor.class);
+
+        // using CALLS_REAL_METHODS because the repository delete method is
+        // unstubbed (you haven't defined a specific behavior for it like all other methods using when )
         mock(CloudVendorRepository.class, Mockito.CALLS_REAL_METHODS);
 
+        // Answer specifies an action that is executed
+        // and a return value that is returned when you interact with the mock.
+
         doAnswer(Answers.CALLS_REAL_METHODS).when(cloudVendorRepository)
-                .deleteById(any());
+                .deleteById(any());    //any type of argument
         assertThat(cloudVendorService.deleteCloudVendor("1")).isEqualTo("Success");
     }
 
