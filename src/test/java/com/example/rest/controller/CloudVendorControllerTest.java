@@ -52,22 +52,29 @@ class CloudVendorControllerTest {
     @Test
     void getCloudVendorDetails() throws Exception {
         when(cloudVendorService.getCloudVendor("1")).thenReturn(cloudVendorOne);
-        this.mockMvc.perform(get("/cloudvendor/" + "1")).andDo(print()).andExpect(status().isOk());
+        this.mockMvc.perform(get("/cloudvendor/" + "1"))
+                .andDo(print())   //log the request and response details to the console
+                // It's helpful for debugging purposes.
+                .andExpect(status().isOk()); //This assertion checks if the response status is 200 (OK)
+
     }
 
     @Test
     void getAllCloudVendorDetails() throws  Exception {
         when(cloudVendorService.getAllCloudVendors()).thenReturn(cloudVendorList);
-        this.mockMvc.perform(get("/cloudvendor/"))
-                .andDo(print()).andExpect(status().isOk());
+        this.mockMvc.perform(get("/cloudvendor/")).andDo(print()).andExpect(status().isOk());
+
     }
 
     @Test
     void createCloudVendorDetails() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false); // outermost element in json
+        // not to add extra wrapping curly braces like this {"cloudVendor":{ key:value pairs}}
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson=ow.writeValueAsString(cloudVendorOne);
+
+        // all the above is to convert the object into json string
 
         when(cloudVendorService.createCloudVendor(cloudVendorOne)).thenReturn("Success");
         this.mockMvc.perform(post("/cloudvendor/")
